@@ -2,7 +2,7 @@ package com.ally.stepDefenitions;
 
 import com.ally.utilities.ConfigReader;
 import com.ally.utilities.Driver;
-import com.ally.utilities.ExelReader;
+import com.ally.utilities.ExcelReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -29,7 +29,7 @@ public class DryRun {
 
     public void testExcelReader(){
 
-        System.out.println("ExelReader.getCell(2,3) = " + ExelReader.getRowCell(2, 2));
+        System.out.println("ExelReader.getCell(2,3) = " + ExcelReader.getRowCell(2, 2));
 
     }
 

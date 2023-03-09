@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ExelReader {
+public class ExcelReader {
 
     public static String getRowCell(int rowNum, int cellNum) {
 

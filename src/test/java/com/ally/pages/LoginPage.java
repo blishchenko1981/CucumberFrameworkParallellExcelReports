@@ -1,7 +1,7 @@
 package com.ally.pages;
 
 import com.ally.utilities.Driver;
-import com.ally.utilities.ExelReader;
+import com.ally.utilities.ExcelReader;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,7 +30,7 @@ public class LoginPage {
         String user = "User" + userNumber ;
         userName.sendKeys(user);
 
-        String pass= ExelReader.getRowCell(userNumber,2);
+        String pass= ExcelReader.getRowCell(userNumber,2);
         password.sendKeys(pass);
 
         loginBtn.click();

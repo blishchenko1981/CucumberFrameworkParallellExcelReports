@@ -9,8 +9,13 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         glue = "com/ally/stepDefenitions",
         features = "src/test/resources/features",
-        dryRun = false,
 
+        plugin = {"pretty",
+                "json:target/cucumber.json",
+                "html:target/cucumber_report.html",
+                "rerun:target/rerun.txt"  },
+
+        dryRun = false,
         tags = "@ui"
 )
 public class Runner {

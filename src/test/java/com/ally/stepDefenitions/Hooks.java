@@ -1,6 +1,7 @@
 package com.ally.stepDefenitions;
 
 import com.ally.utilities.Driver;
+import com.ally.utilities.Screenshot;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -22,9 +23,7 @@ public class Hooks {
 
         if(scenario.isFailed()){
 
-            TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
-            byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "ScreenshotFailedScenario");
+            Screenshot.take(scenario);
 
         }
 
