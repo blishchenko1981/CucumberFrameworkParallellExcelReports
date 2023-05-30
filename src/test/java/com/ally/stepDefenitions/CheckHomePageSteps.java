@@ -6,12 +6,15 @@ import com.ally.pages.SettingsPage;
 import com.ally.utilities.BrowserUtil;
 import com.ally.utilities.Driver;
 import com.github.javafaker.Faker;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.*;
 
@@ -142,11 +145,31 @@ public class CheckHomePageSteps {
 
     @Then("user can change fields")
     public void user_can_change_fields() {
+
+        Actions actions = new Actions(Driver.getDriver());
+        settingsPage.userNameField.click();
+
+        BrowserUtil.wait(1);
+
+        actions.keyDown(Keys.CONTROL)
+                .sendKeys("a")
+                .keyUp(Keys.CONTROL)
+                .sendKeys(Keys.DELETE)
+                .perform();
         settingsPage.userNameField.sendKeys(username);
+
+        BrowserUtil.wait(1);
     }
 
     @And("navigate back to Home page")
     public void navigateBackToHomePage() {
 
+        homePage.tryCloudIcon.click();
+    }
+
+
+    @Then("name on the Home page greeting displayed correctly")
+    public void nameOnTheHomePageGreetingDisplayedCorrectly() {
+        Assert.assertTrue(homePage.greetings.getText().contains(username));
     }
 }

@@ -69,11 +69,12 @@ Feature: User can have use all modules on Home page
     When User log out
     Then User see the login page
 
-    Scenario: User can change fields in settings page
-      When user click on settings
-      And click  settings icon on dropdown
-      Then setting page is displayed
-      And user can change fields
-      And navigate back to Home page
-      Then name on the Home page greeting displayed correctly
+  @ui
+  Scenario: User can change fields in settings page
+    When user click on settings
+    And click  settings icon on dropdown
+    Then setting page is displayed
+    And user can change fields
+    And navigate back to Home page
+    Then name on the Home page greeting displayed correctly
 

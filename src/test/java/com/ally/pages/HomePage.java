@@ -62,4 +62,7 @@ public class HomePage extends CommonElements {
     @FindBy(xpath = "//li[@data-id='settings']")
     public WebElement settingsBtn;
 
+    @FindBy(xpath = "//div[@id='app-dashboard']/h2")
+    public WebElement greetings;
+
 }
