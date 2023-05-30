@@ -10,8 +10,8 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class Hooks {
 
-    @Before
-    public void setupScenario(){
+    @Before("ui")
+    public void setupScenario() {
 
         System.out.println("Setting up browser using cucumber @Before each scenario");
     }
@@ -19,9 +19,9 @@ public class Hooks {
 
     @After("@ui")
 
-    public void teardownScenario(Scenario scenario){
+    public void teardownScenario(Scenario scenario) {
 
-        if(scenario.isFailed()){
+        if (scenario.isFailed()) {
 
             Screenshot.take(scenario);
 

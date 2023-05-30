@@ -1,3 +1,4 @@
+@ui
 Feature: invalid credentials
 
   Scenario Outline: error message should be displayed if user provide wrong email or password
