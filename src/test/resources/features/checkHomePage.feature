@@ -23,7 +23,7 @@ Feature: User can have use all modules on Home page
       | calendar   |
       | deck       |
 
-  @ui
+@ui
   Scenario: User can use UserSettings dropdown
 
     When user click on settings

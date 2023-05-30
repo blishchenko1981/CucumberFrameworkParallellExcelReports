@@ -22,12 +22,12 @@ public class CheckHomePageSteps {
 
     HomePage homePage = new HomePage();
     SettingsPage settingsPage = new SettingsPage();
+    Faker faker = new Faker();
 
     @When("User click on module {string}")
     public void user_click_on_module(String moduleName) {
 
-        WebElement module = Driver.getDriver().findElement(By.xpath("//ul[@id='appmenu']//li[@data-id='" + moduleName + "']"));
-        module.click();
+        homePage.clickOnTab(moduleName);
     }
 
     @Then("{string} page is open")
@@ -42,9 +42,7 @@ public class CheckHomePageSteps {
 
     @And("User log out")
     public void userLogedOut() throws InterruptedException {
-        homePage.UserSettings.click();
-        homePage.logOut.click();
-        BrowserUtil.wait(2);
+        homePage.logOut();
 
 
     }
@@ -52,22 +50,15 @@ public class CheckHomePageSteps {
 
     @When("user click on settings")
     public void user_click_on_settings() {
-        homePage.UserSettings.click();
+        homePage.userSettings.click();
     }
 
     @Then("dropdown is displayed and include names")
-    public void dropdown_is_displayed_and_include(List<String> ExpectedOptions) {
+    public void dropdown_is_displayed_and_include(List<String> expectedOptions) {
 
-        System.out.println("options = " + ExpectedOptions);
+        System.out.println("options = " + expectedOptions);
 
-        for (int i = 0; i < ExpectedOptions.size(); i++) {
-
-            System.out.println("homePage.settingsOptions.get(i).getText() = " + homePage.settingsOptions.get(i).getText());
-
-            Assert.assertTrue(homePage.settingsOptions.get(i).getText().contains(ExpectedOptions.get(i)));
-
-        }
-
+        homePage.assertIfOptionIsDisplayed(expectedOptions);
 
     }
 
@@ -77,16 +68,7 @@ public class CheckHomePageSteps {
 
         System.out.println("statusOptions = " + statusOptions);
 
-        boolean correctOption = false;
-        for (String each : statusOptions) {
-
-            if (homePage.onlineStatus.getText().contains(each)) {
-                correctOption = true;
-                System.out.println("homePage.onlineStatus.getText() = " + homePage.onlineStatus.getText());
-            }
-        }
-
-        Assert.assertTrue(correctOption);
+        Assert.assertTrue(homePage.isCorrectOption(statusOptions));
     }
 
 
@@ -140,25 +122,13 @@ public class CheckHomePageSteps {
 
     }
 
-    Faker faker = new Faker();
+
     String username = faker.name().firstName();
 
     @Then("user can change fields")
     public void user_can_change_fields() {
 
-        Actions actions = new Actions(Driver.getDriver());
-        settingsPage.userNameField.click();
-
-        BrowserUtil.wait(1);
-
-        actions.keyDown(Keys.CONTROL)
-                .sendKeys("a")
-                .keyUp(Keys.CONTROL)
-                .sendKeys(Keys.DELETE)
-                .perform();
-        settingsPage.userNameField.sendKeys(username);
-
-        BrowserUtil.wait(1);
+        settingsPage.changeUserName(username);
     }
 
     @And("navigate back to Home page")
