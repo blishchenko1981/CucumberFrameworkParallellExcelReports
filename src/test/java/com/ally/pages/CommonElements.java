@@ -7,14 +7,33 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CommonElements {
+public abstract class CommonElements {
 
-    public CommonElements(){
+    public CommonElements() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
     @FindBy(xpath = "//div[@class='logo logo-icon']")
     public WebElement tryCloudIcon;
+    //_________________________ UserMenu elements __________________________________________________
+
+    @FindBy(xpath = "//span[@aria-label='Magnify icon']")
+    public WebElement searchBtn;
+
+    @FindBy(xpath = "//div[@aria-label='Notifications']")
+    public WebElement notificationsBtn;
+
+    @FindBy(xpath = "//div[@aria-controls='contactsmenu-menu']")
+    public WebElement usersBtn;
+
+    //_____________Search window _______
+
+    @FindBy(xpath = "//input[@type='search']")
+    public WebElement searchInputBox;
+
+    @FindBy(xpath = "//a[contains(@href, 'http')]//h3//span")
+    public List<WebElement> searchResultListOfComments;
+
 
     // ________________________ HomeMenu Tabs ________________________________________________
 
@@ -35,7 +54,6 @@ public class CommonElements {
 
     @FindBy(xpath = "//ul[@id='appmenu']//li[@data-id='talk']")
     public WebElement talk;
-
 
 
 }

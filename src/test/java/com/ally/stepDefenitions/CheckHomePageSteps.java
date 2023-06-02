@@ -142,4 +142,28 @@ public class CheckHomePageSteps {
     public void nameOnTheHomePageGreetingDisplayedCorrectly() {
         Assert.assertTrue(homePage.greetings.getText().contains(username));
     }
+
+
+    // __________________ search Function ______________________________
+    @When("user click on search")
+    public void user_click_on_search() {
+        homePage.searchBtn.click();
+    }
+
+
+    @When("type {string} in search box")
+    public void type_in_search_box(String searchWord) {
+        homePage.searchInputBox.sendKeys(searchWord);
+
+    }
+
+    @Then("all results contain {string}")
+    public void all_results_contain(String searchWord) {
+
+        for (WebElement each : homePage.searchResultListOfComments) {
+
+            System.out.println("each.getText() = " + each.getText());
+            Assert.assertTrue(each.getText().toLowerCase().contains(searchWord.toLowerCase()));
+        }
+    }
 }

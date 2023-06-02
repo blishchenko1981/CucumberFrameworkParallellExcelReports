@@ -29,6 +29,8 @@ public class HomePage extends CommonElements {
     public WebElement logOut;
 
 
+
+
     //--------------------------Settings Options  --------------------------------------------
 
     @FindBy(xpath = "//nav[@class='settings-menu menu']//li")

@@ -23,7 +23,7 @@ Feature: User can have use all modules on Home page
       | calendar   |
       | deck       |
 
-@ui
+  @ui
   Scenario: User can use UserSettings dropdown
 
     When user click on settings
@@ -77,4 +77,12 @@ Feature: User can have use all modules on Home page
     And user can change fields
     And navigate back to Home page
     Then name on the Home page greeting displayed correctly
+
+
+  @ui
+  Scenario: User can use search function
+    When user click on search
+    And type "world" in search box
+    Then all results contain "world"
+
 
