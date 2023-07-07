@@ -18,3 +18,12 @@ Feature: files tab functions
     And User copy the link
     And User open link in a new tab
     Then User can see the file is open
+
+    @ui
+  Scenario: User can add new folder on files page
+    When User click on module "files"
+    And Click plus icon
+    And Select folder in dropdown menu
+    And Give the File name "HappyTesting"
+    Then Folder "HappyTesting" should be displayed on the page
+    And Folder "HappyTesting" can be deleted

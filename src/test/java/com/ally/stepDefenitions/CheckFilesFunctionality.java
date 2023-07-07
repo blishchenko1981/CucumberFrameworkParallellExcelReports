@@ -5,10 +5,12 @@ import com.ally.utilities.BrowserUtil;
 import com.ally.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en_old.Ac;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -85,16 +87,63 @@ public class CheckFilesFunctionality {
         System.out.println("firstFileName = " + firstFileName);
         System.out.println("fileName = " + fileName);
 
-     //   Assert.assertEquals(firstFileName.substring(0, firstFileName.indexOf(".")), fileName.substring(0, fileName.indexOf(".")));
-        Assert.assertTrue(fileName.startsWith(firstFileName.substring(0, firstFileName.indexOf(".")-1)));
+        //   Assert.assertEquals(firstFileName.substring(0, firstFileName.indexOf(".")), fileName.substring(0, fileName.indexOf(".")));
+        if(fileName.contains(".")){
+        Assert.assertTrue(fileName.startsWith(firstFileName.substring(0, firstFileName.indexOf(".") - 1)));
         Assert.assertTrue(fileName.endsWith(firstFileName.substring(firstFileName.indexOf("."))));
+        }else {
+            Assert.assertEquals(fileName, firstFileName);
+        }
+
+
     }
 
 
+    @And("Click plus icon")
+    public void clickPlusIcon() {
+        filesPage.plusBtn.click();
+    }
 
 
+    @And("Select folder in dropdown menu")
+    public void selectFolderInDropdownMenu() {
+        filesPage.newFolder.click();
+    }
 
+    @And("Give the File name {string}")
+    public void giveTheFileName(String name) {
+
+        filesPage.provideNameForNewFolder(name);
+
+    }
+
+    @Then("Folder {string} should be displayed on the page")
+    public void folderShouldBeDisplayedOnThePage(String name) {
+        BrowserUtil.wait(2);
+
+        Assert.assertTrue(filesPage.getListEachNameOfFiles().contains(name));
+    }
+
+    @And("Folder {string} can be deleted")
+    public void folderCanBeDeleted(String name) {
+
+        Actions action = new Actions(Driver.getDriver());
+
+        for (WebElement eachName : filesPage.listAllFiles) {
+            if (eachName.getText().contains(name)) {
+                action.moveToElement(eachName).contextClick().perform();
+                break;
+            }
         }
+
+        BrowserUtil.wait(5);
+        filesPage.delete.click();
+
+        BrowserUtil.wait(1);
+
+        Assert.assertFalse(filesPage.getListEachNameOfFiles().contains(name));
+    }
+}
 
 
 
